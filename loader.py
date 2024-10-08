@@ -10,14 +10,14 @@ ADMIN_ID = str(os.environ.get('ADMIN_ID'))
 BOT_TOKEN = str(os.environ.get('BOT_TOKEN'))
 FEEDBACK_GROUP_ID = str(os.environ.get('FEEDBACK_GROUP_ID'))
 
-TIMECODE_1 = 3
-TIMECODE_2 = 3
-TIMECODE_2_2 = 3
-TIMECODE_3 = 3
-TIMECODE_3_2 = 3
-TIMECODE_4 = 3
-TIMECODE_4_2 = 3
-TIMECODE_5 = 3
+TIMECODE_1 = 7
+TIMECODE_2 = 7
+TIMECODE_2_2 = 7
+TIMECODE_3 = 7
+TIMECODE_3_2 = 7
+TIMECODE_4 = 7
+TIMECODE_4_2 = 7
+TIMECODE_5 = 7
 
 # storage = RedisStorage2(db=2)
 storage = MemoryStorage()

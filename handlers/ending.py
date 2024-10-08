@@ -12,6 +12,7 @@ async def send_welcome(message: types.Message, state: FSMContext):
     if message.text != texts.finished_btn:
         await message.answer(texts.wrong_btn_input, reply_markup=kb.finished_kb)
         return
+    await state.update_data(time_5=0)
     await message.answer(texts.ask_secret)
     await State.secret_submitting.set()
 

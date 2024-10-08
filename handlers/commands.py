@@ -16,8 +16,12 @@ async def send_welcome(message: types.Message, state: FSMContext):
     await State.starting.set()
     await state.update_data(time_1=1)
     await state.update_data(time_2=1)
+    await state.update_data(time_2_2=1)
     await state.update_data(time_3=1)
+    await state.update_data(time_3_2=1)
     await state.update_data(time_4=1)
+    await state.update_data(time_4_2=1)
+    await state.update_data(time_5=1)
     
 
 

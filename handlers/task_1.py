@@ -1,9 +1,10 @@
-from loader import dp
+from loader import dp, TIMECODE_1
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 import texts
 import keyboards as kb
 from states import State
+import asyncio
 
 
 @dp.message_handler(state=State.begin_waiting)
@@ -17,6 +18,14 @@ async def send_welcome(message: types.Message, state: FSMContext):
     await message.answer(texts.task_1_3, reply_markup=kb.flag_achieved_kb)
 
     await State.task_1_running.set()
+    await asyncio.sleep(TIMECODE_1)
+    data = await state.get_data()
+    time_1 = data.get('time_1')
+    if int(time_1) == 1:
+        with open('images/running_fox.jpg', 'rb') as photo:
+            await message.answer_photo(photo, caption=texts.timecode_1_1)
+        await message.answer(texts.timecode_1_2, reply_markup=kb.flag_achieved_kb)
+        
 
 
 @dp.message_handler(state=State.task_1_running)
@@ -24,7 +33,7 @@ async def send_welcome(message: types.Message, state: FSMContext):
     if message.text != texts.flag_achieved_btn:
         await message.answer(texts.wrong_btn_input, reply_markup=kb.flag_achieved_kb)
         return
-    
+    await state.update_data(time_1=0)
     await message.answer(texts.task_question_1)
     await State.task_1_solving.set()
 

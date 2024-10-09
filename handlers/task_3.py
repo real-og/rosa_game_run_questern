@@ -5,6 +5,8 @@ import texts
 import keyboards as kb
 from states import State
 import asyncio
+import aiotable
+import time
 
 
 @dp.message_handler(state=State.task_2_solved)
@@ -53,5 +55,13 @@ async def send_welcome(message: types.Message, state: FSMContext):
             await message.answer_photo(photo, caption=texts.task_3_correct)
         await message.answer(texts.task_3_correct_2, reply_markup=kb.run_next_kb)
         await State.task_3_solved.set()
+
+        data = await state.get_data()
+        start = data.get('start')
+        finish = int(time.time())
+        time_spent = texts.build_time(start, finish)
+        try_count = data.get('try_count')
+        id = str(message.from_id) + '-' + str(try_count) + 'new'
+        await aiotable.update_cell(id, 8, time_spent.split('я: ')[1])
     else:
         await message.answer(texts.wrong_answer)

@@ -34,8 +34,8 @@ async def send_welcome(message: types.Message, state: FSMContext):
         await State.waiting_for_gift.set()
 
         try_count = data.get('try_count')
-        id = str(message.from_id) + '-' + str(try_count)
-        await aiotable.update_cell(id, 4, time_spent.split('я: ')[1])
+        id = str(message.from_id) + '-' + str(try_count) + 'new'
+        await aiotable.update_cell(id, 5, time_spent.split('я: ')[1])
     else:
         await message.answer(texts.wrong_answer)
 

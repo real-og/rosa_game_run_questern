@@ -20,8 +20,8 @@ TIMECODE_4 = 2 * 60
 TIMECODE_4_2 = 5 * 60
 TIMECODE_5 = 3 * 60
 
-# storage = RedisStorage2(db=2)
-storage = MemoryStorage()
+storage = RedisStorage2(db=13)
+# storage = MemoryStorage()
 
 bot = Bot(token=BOT_TOKEN, parse_mode="HTML")
 dp = Dispatcher(bot, storage=storage)

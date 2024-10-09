@@ -43,8 +43,9 @@ async def send_welcome(message: types.Message, state: FSMContext):
 
     data = await state.get_data()
     try_count = data.get('try_count')
-    id = str(message.from_id) + '-' + str(try_count)
-    await aiotable.append_user(id, str(message.from_user.username), str(phone_number))
+    name = data.get('name')
+    id = str(message.from_id) + '-' + str(try_count) + 'new'
+    await aiotable.append_user(id, str(message.from_user.username), str(phone_number), str(name))
     
 
 

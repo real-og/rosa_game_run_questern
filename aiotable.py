@@ -22,9 +22,9 @@ async def get_sheet(agcm=agcm):
     return zero_ws
 
 
-async def append_user(id: str, username: str, phone_num):
+async def append_user(id: str, username: str, phone_num, name):
     sheet = await get_sheet()
-    await sheet.append_row([str(id), str(username), str(phone_num)])
+    await sheet.append_row([str(id), str(username), str(phone_num), name])
 
              
         

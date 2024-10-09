@@ -5,6 +5,8 @@ import texts
 import keyboards as kb
 from states import State
 import asyncio
+import aiotable
+import time
 
 
 @dp.message_handler(state=State.task_3_solved)
@@ -52,6 +54,14 @@ async def send_welcome(message: types.Message, state: FSMContext):
             await message.answer_photo(photo)
         await message.answer(texts.task_question_4_2)
         await State.task_4_solved.set()
+
+        data = await state.get_data()
+        start = data.get('start')
+        finish = int(time.time())
+        time_spent = texts.build_time(start, finish)
+        try_count = data.get('try_count')
+        id = str(message.from_id) + '-' + str(try_count) + 'new'
+        await aiotable.update_cell(id, 9, time_spent.split('я: ')[1])
     else:
         await message.answer(texts.wrong_answer)
 
@@ -65,6 +75,14 @@ async def send_welcome(message: types.Message, state: FSMContext):
     if message.text.lower() in ans:
         await message.answer(texts.task_4_correct, reply_markup=kb.run_to_finish_kb)
         await State.task_4_solved_full.set()
+
+        data = await state.get_data()
+        start = data.get('start')
+        finish = int(time.time())
+        time_spent = texts.build_time(start, finish)
+        try_count = data.get('try_count')
+        id = str(message.from_id) + '-' + str(try_count) + 'new'
+        await aiotable.update_cell(id, 10, time_spent.split('я: ')[1])
     else:
         await message.answer(texts.wrong_answer)
 

@@ -5,6 +5,7 @@ import texts
 import keyboards as kb
 from states import State
 import asyncio
+import time
 
 
 @dp.message_handler(state=State.begin_waiting)
@@ -13,6 +14,7 @@ async def send_welcome(message: types.Message, state: FSMContext):
         await message.answer(texts.wrong_btn_input, reply_markup=kb.begin_kb)
         return
     
+    await state.update_data(start=int(time.time()))
     await message.answer(texts.task_1_1)
     await message.answer(texts.task_1_2)
     await message.answer(texts.task_1_3, reply_markup=kb.flag_achieved_kb)
@@ -26,7 +28,6 @@ async def send_welcome(message: types.Message, state: FSMContext):
             await message.answer_photo(photo, caption=texts.timecode_1_1)
         await message.answer(texts.timecode_1_2, reply_markup=kb.flag_achieved_kb)
         
-
 
 @dp.message_handler(state=State.task_1_running)
 async def send_welcome(message: types.Message, state: FSMContext):
@@ -42,6 +43,7 @@ async def send_welcome(message: types.Message, state: FSMContext):
 async def send_welcome(message: types.Message, state: FSMContext):
     ans = ['гарри поттер', 'гари потер', 'гарри потер', 'гари поттер', 'harry potter']
     if message.text.lower() in ans:
+        await message.answer(texts.r_letter)
         with open('images/r.jpg', 'rb') as photo:
             await message.answer_photo(photo)
         with open('images/fox_2.jpg', 'rb') as photo:
@@ -49,7 +51,7 @@ async def send_welcome(message: types.Message, state: FSMContext):
         await message.answer(texts.task_1_correct_2, reply_markup=kb.run_next_kb)
         await State.task_1_solved.set()
     else:
-        await message.answer(texts.task_question_1_wrong)
+        await message.answer(texts.wrong_answer)
 
 
 

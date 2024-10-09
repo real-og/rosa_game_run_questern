@@ -28,4 +28,13 @@ finished_kb = ReplyKeyboardMarkup([[texts.finished_btn]],
                                      resize_keyboard=True,
                                      one_time_keyboard=True)
 
+gift_kb = ReplyKeyboardMarkup([[texts.gift_btn]],
+                                     resize_keyboard=True,
+                                     one_time_keyboard=True)
+
+number_btn = KeyboardButton(texts.share_number_btn, request_contact=True)
+number_kb = ReplyKeyboardMarkup([[number_btn, texts.no_btn]],
+                                     resize_keyboard=True,
+                                     one_time_keyboard=True)
+
 

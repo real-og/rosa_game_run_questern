@@ -32,9 +32,6 @@ async def send_welcome(message: types.Message, state: FSMContext):
         await message.answer(texts.timecode_2_3, reply_markup=kb.flag_achieved_kb)
 
     
-        
-
-
 @dp.message_handler(state=State.task_2_running)
 async def send_welcome(message: types.Message, state: FSMContext):
     if message.text != texts.flag_achieved_btn:
@@ -50,6 +47,7 @@ async def send_welcome(message: types.Message, state: FSMContext):
 async def send_welcome(message: types.Message, state: FSMContext):
     ans = ['часы']
     if message.text.lower() in ans:
+        await message.answer(texts.s_letter)
         with open('images/s.jpg', 'rb') as photo:
             await message.answer_photo(photo)
         with open('images/fox_back.jpg', 'rb') as photo:

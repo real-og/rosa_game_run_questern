@@ -29,4 +29,9 @@ class State(StatesGroup):
 
     secret_submitting = State()
     feedback_submitting = State()
+
+    waiting_for_number = State()
+
+    waiting_for_gift = State()
+    end = State()
     

@@ -23,7 +23,6 @@ async def send_welcome(message: types.Message, state: FSMContext):
         with open('images/running_fox_2.jpg', 'rb') as photo:
             await message.answer_photo(photo, caption=texts.timecode_4_1, reply_markup=kb.flag_achieved_kb)
         
-
     await asyncio.sleep(TIMECODE_4_2)
     data = await state.get_data()
     time_4_2 = data.get('time_4_2')
@@ -48,6 +47,7 @@ async def send_welcome(message: types.Message, state: FSMContext):
 async def send_welcome(message: types.Message, state: FSMContext):
     ans = ['венера']
     if message.text.lower() in ans:
+        await message.answer(texts.a_letter)
         with open('images/a.jpg', 'rb') as photo:
             await message.answer_photo(photo)
         await message.answer(texts.task_question_4_2)
@@ -59,9 +59,10 @@ async def send_welcome(message: types.Message, state: FSMContext):
 @dp.message_handler(state=State.task_4_solved)
 async def send_welcome(message: types.Message, state: FSMContext):
     ans = ['rosa']
+    if message.text.lower() == 'роза':
+        await message.answer(texts.change_to_latin)
+        return
     if message.text.lower() in ans:
-        with open('images/rosa.jpg', 'rb') as photo:
-            await message.answer_photo(photo)
         await message.answer(texts.task_4_correct, reply_markup=kb.run_to_finish_kb)
         await State.task_4_solved_full.set()
     else:

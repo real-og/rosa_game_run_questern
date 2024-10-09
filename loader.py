@@ -6,18 +6,19 @@ import os
 
 
 logging.basicConfig(level=logging.WARNING)
-ADMIN_ID = str(os.environ.get('ADMIN_ID'))
+
 BOT_TOKEN = str(os.environ.get('BOT_TOKEN'))
 FEEDBACK_GROUP_ID = str(os.environ.get('FEEDBACK_GROUP_ID'))
+SHEET_LINK = str(os.environ.get('SHEET_LINK'))
 
-TIMECODE_1 = 7
-TIMECODE_2 = 7
-TIMECODE_2_2 = 7
-TIMECODE_3 = 7
-TIMECODE_3_2 = 7
-TIMECODE_4 = 7
-TIMECODE_4_2 = 7
-TIMECODE_5 = 7
+TIMECODE_1 = 5 * 60
+TIMECODE_2 = 2 * 60
+TIMECODE_2_2 = 5 * 60
+TIMECODE_3 = 1 * 60
+TIMECODE_3_2 = 4 * 60
+TIMECODE_4 = 2 * 60
+TIMECODE_4_2 = 5 * 60
+TIMECODE_5 = 3 * 60
 
 # storage = RedisStorage2(db=2)
 storage = MemoryStorage()

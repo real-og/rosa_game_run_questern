@@ -22,7 +22,6 @@ async def send_welcome(message: types.Message, state: FSMContext):
     if int(time_3) == 1:
         await message.answer(texts.timecode_3_1, reply_markup=kb.flag_achieved_kb)
         
-
     await asyncio.sleep(TIMECODE_3_2)
     data = await state.get_data()
     time_3_2 = data.get('time_3_2')
@@ -47,6 +46,7 @@ async def send_welcome(message: types.Message, state: FSMContext):
 async def send_welcome(message: types.Message, state: FSMContext):
     ans = ['греция', 'древняя греция', 'греции', 'в греции', 'древней греции', 'в древней греции']
     if message.text.lower() in ans:
+        await message.answer(texts.o_letter)
         with open('images/o.jpg', 'rb') as photo:
             await message.answer_photo(photo)
         with open('images/fox_2.jpg', 'rb') as photo:
